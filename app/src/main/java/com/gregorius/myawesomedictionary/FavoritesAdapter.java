@@ -48,7 +48,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
                     words.remove(position);
                     notifyItemRemoved(position);
                     notifyItemRangeChanged(position, words.size());
-
+                    Toast.makeText(view.getContext(), "Word deleted successfully!", Toast.LENGTH_SHORT).show();
                 }
             });
 

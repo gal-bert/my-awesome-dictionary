@@ -91,9 +91,14 @@ public class ShowActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ExploreHelper exploreHelper = new ExploreHelper(view.getContext());
-                exploreHelper.insert(intentWord);
-                Toast.makeText(view.getContext(), "Word saved successfully!", Toast.LENGTH_SHORT).show();
-                finish();
+
+                if(exploreHelper.insert(intentWord)){
+                    Toast.makeText(view.getContext(), "Word saved successfully!", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(view.getContext(), "Word exist in favorites!", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 

@@ -3,14 +3,17 @@ package com.gregorius.myawesomedictionary;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExploreHelper {
     DBHelper dbHelper;
+    Context context;
 
     public ExploreHelper(Context context) {
+        this.context = context;
         this.dbHelper = new DBHelper(context);
     }
 
@@ -36,14 +39,25 @@ public class ExploreHelper {
         return words;
     }
 
-    public void insert(String word){
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
 
+    public boolean insert(String word){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
         String[] insert = {word};
 
-        db.execSQL("INSERT INTO favorites (word) VALUES (?)", insert);
-        db.close();
-        dbHelper.close();
+        Cursor cursor = db.rawQuery("SELECT * FROM favorites WHERE word = ?", insert);
+        if(cursor.moveToFirst()){
+            cursor.close();
+            db.close();
+            dbHelper.close();
+            return false;
+        }
+        else {
+            db.execSQL("INSERT INTO favorites (word) VALUES (?)", insert);
+            cursor.close();
+            db.close();
+            dbHelper.close();
+            return true;
+        }
     }
 
     public void delete(String word){
