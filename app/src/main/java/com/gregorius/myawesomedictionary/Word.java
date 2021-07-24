@@ -1,11 +1,15 @@
 package com.gregorius.myawesomedictionary;
 
+import java.util.List;
+
 public class Word {
 
     private String word;
+    private List<Definitions> definitions;
 
-    public Word(String word) {
+    public Word(String word, List<Definitions> definitions) {
         this.word = word;
+        this.definitions = definitions;
     }
 
     public String getWord() {
@@ -16,4 +20,11 @@ public class Word {
         this.word = word;
     }
 
+    public List<Definitions> getDefinitions() {
+        return definitions;
+    }
+
+    public void setDefinitions(List<Definitions> definitions) {
+        this.definitions = definitions;
+    }
 }

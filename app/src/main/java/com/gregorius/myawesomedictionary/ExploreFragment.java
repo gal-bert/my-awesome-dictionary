@@ -24,14 +24,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ExploreFragment extends Fragment {
 
     Context context;
-    List<WordListResponse> wordListResponses;
+    List<Word> words;
+    List<Definitions> definitions;
     RecyclerView rvExplore;
     ExploreAdapter exploreAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        wordListResponses = new Vector<>();
 
         View view = inflater.inflate(R.layout.fragment_explore, container, false);
 
@@ -39,35 +38,37 @@ public class ExploreFragment extends Fragment {
         LinearLayoutManager manager = new LinearLayoutManager(context);
         rvExplore.setLayoutManager(manager);
 
-        exploreAdapter = new ExploreAdapter(wordListResponses);
-        rvExplore.setAdapter(exploreAdapter);
-
         Retrofit retrofit = APIClient.getRetrofit();
         HerokuService herokuService = retrofit.create(HerokuService.class);
 
-        Call<WordListResponse> call = herokuService.getWords("app");
+        Call<List<Word>> call = herokuService.getWords("app");
 
-        call.enqueue(new Callback<WordListResponse>() {
+        call.enqueue(new Callback<List<Word>>() {
             @Override
-            public void onResponse(Call<WordListResponse> call, Response<WordListResponse> response) {
-                Log.i("MYLOGS", String.valueOf(response));
-                Log.i("MYLOGS", "OK1");
+            public void onResponse(Call<List<Word>> call, Response<List<Word>> response) {
                 if (response.isSuccessful()){
-                    Log.i("MYLOGS", "OK");
-                    WordListResponse wordListResponse = response.body();
-                    wordListResponses = (List<WordListResponse>) wordListResponse;
-                    exploreAdapter.setListWord(wordListResponses);
-                }
-                else{
-                    Log.i("MYLOGS", "fail");
+                    words = response.body();
+
+                    exploreAdapter = new ExploreAdapter(words);
+                    rvExplore.setAdapter(exploreAdapter);
+                    exploreAdapter.setWords(words);
+
+                    for(Word word : words){
+                        Log.i("MYLOGS", word.getWord());
+                        definitions = word.getDefinitions();
+                        for(Definitions definition : definitions){
+                            Log.i("MYLOGS", definition.getDefinition());
+                        }
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<WordListResponse> call, Throwable t) {
-                Log.i("MYLOGS", String.valueOf(t));
+            public void onFailure(Call<List<Word>> call, Throwable t) {
+                Log.i("MYLOGS", t.getMessage());
             }
         });
+
 
         return view;
     }

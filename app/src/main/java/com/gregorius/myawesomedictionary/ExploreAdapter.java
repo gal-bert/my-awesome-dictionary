@@ -1,40 +1,53 @@
 package com.gregorius.myawesomedictionary;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.Vector;
 
 public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHolder> {
 
-    List<WordListResponse> wordListResponses;
+    List<Word> words;
 
-    public ExploreAdapter(List<WordListResponse> wordListResponses){
-        this.wordListResponses = wordListResponses;
+    public ExploreAdapter(List<Word> words){
+        this.words = words;
     }
 
-    public void setListWord(List<WordListResponse> wordListResponses){
-        this.wordListResponses = wordListResponses;
+    public void setWords(List<Word> words){
+        this.words = words;
         notifyDataSetChanged();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tvWord;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvWord = itemView.findViewById(R.id.tvWord);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            int position = getAdapterPosition();
+            String word = words.get(position).getWord();
+            Log.i("MYLOG", "WORD: " + word);
+
+            Intent intent = new Intent(itemView.getContext(), ShowActivity.class);
+            intent.putExtra("WORD", word);
+
+            itemView.getContext().startActivity(intent);
         }
     }
 
@@ -46,13 +59,12 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        WordListResponse wordListResponse = wordListResponses.get(position);
-        holder.tvWord.setText(wordListResponse.word);
+        holder.tvWord.setText(words.get(position).getWord());
     }
 
     @Override
     public int getItemCount() {
-        return wordListResponses.size();
+        return words.size();
     }
 
 
