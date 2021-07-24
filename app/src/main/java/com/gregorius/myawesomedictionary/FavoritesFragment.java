@@ -3,6 +3,7 @@ package com.gregorius.myawesomedictionary;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -15,28 +16,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 public class FavoritesFragment extends Fragment {
 
-    Context context;
+    static Context context;
     RecyclerView rvFavorites;
-    List<String> words;
-    FavoritesAdapter favoritesAdapter;
+    static List<String> words;
+    static FavoritesAdapter favoritesAdapter;
+    static ExploreHelper exploreHelper;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
+
+        context = container.getContext();
+
         rvFavorites = view.findViewById(R.id.rvFavorites);
 
-        ExploreHelper exploreHelper = new ExploreHelper(getContext());
+        exploreHelper = new ExploreHelper(getContext());
         words = exploreHelper.selectAll();
-
-        for(String word : words){
-            Log.i("MYLOG", word);
-        }
 
         LinearLayoutManager manager = new LinearLayoutManager(context);
         rvFavorites.setLayoutManager(manager);
@@ -52,4 +55,20 @@ public class FavoritesFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        exploreHelper = new ExploreHelper(getContext());
+        words = exploreHelper.selectAll();
+        favoritesAdapter.setWords(words);
+    }
+
+    public static void refresh(){
+        exploreHelper = new ExploreHelper(context);
+        words = exploreHelper.selectAll();
+        favoritesAdapter.setWords(words);
+    }
+
 }

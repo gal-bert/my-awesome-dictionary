@@ -1,5 +1,7 @@
 package com.gregorius.myawesomedictionary;
 
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +27,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         notifyDataSetChanged();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tvWord;
         Button btnDelete;
@@ -38,7 +40,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
             btnDelete.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(view.getContext(), "Delete button clicked", Toast.LENGTH_SHORT).show();
                     int position = getAdapterPosition();
                     word = words.get(position);
 
@@ -50,6 +51,21 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
                 }
             });
+
+            itemView.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View view) {
+            int position = getAdapterPosition();
+            word = words.get(position);
+            Log.i("MYLOG", "WORD: " + word);
+
+            Intent intent = new Intent(itemView.getContext(), ShowActivity.class);
+            intent.putExtra("WORD", word);
+
+            itemView.getContext().startActivity(intent);
         }
     }
 

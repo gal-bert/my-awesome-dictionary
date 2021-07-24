@@ -48,6 +48,7 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
                     ExploreHelper exploreHelper = new ExploreHelper(view.getContext());
                     exploreHelper.insert(word);
                     Toast.makeText(view.getContext(), "Word saved successfully!", Toast.LENGTH_SHORT).show();
+                    FavoritesFragment.refresh();
                 }
             });
 
