@@ -11,7 +11,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -31,6 +34,7 @@ public class ShowActivity extends AppCompatActivity {
     List<Definition> definitions;
     ShowAdapter showAdapter;
     Context context;
+    Button btnSave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,7 @@ public class ShowActivity extends AppCompatActivity {
 
         tvWord = findViewById(R.id.tvWord);
         rvShow = findViewById(R.id.rvShow);
+        btnSave = findViewById(R.id.btnSave);
 
         LinearLayoutManager manager = new LinearLayoutManager(this);
         rvShow.setLayoutManager(manager);
@@ -79,6 +84,16 @@ public class ShowActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Word>> call, Throwable t) {
 
+            }
+        });
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ExploreHelper exploreHelper = new ExploreHelper(view.getContext());
+                exploreHelper.insert(intentWord);
+                Toast.makeText(context, "Word saved successfully!", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 

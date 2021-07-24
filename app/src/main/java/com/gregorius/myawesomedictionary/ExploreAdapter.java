@@ -19,6 +19,7 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
 
     List<Word> words;
     Context context;
+    String word;
 
     public ExploreAdapter(List<Word> words){
         this.words = words;
@@ -42,7 +43,11 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
             btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(view.getContext(), "Button Clicked", Toast.LENGTH_SHORT).show();
+                    int position = getAdapterPosition();
+                    word = words.get(position).getWord();
+                    ExploreHelper exploreHelper = new ExploreHelper(view.getContext());
+                    exploreHelper.insert(word);
+                    Toast.makeText(view.getContext(), "Word saved successfully!", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -52,7 +57,7 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
         @Override
         public void onClick(View view) {
             int position = getAdapterPosition();
-            String word = words.get(position).getWord();
+            word = words.get(position).getWord();
             Log.i("MYLOG", "WORD: " + word);
 
             Intent intent = new Intent(itemView.getContext(), ShowActivity.class);
