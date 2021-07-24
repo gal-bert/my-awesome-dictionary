@@ -11,6 +11,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -19,28 +24,46 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class ExploreFragment extends Fragment {
+public class ExploreFragment extends Fragment implements View.OnClickListener {
 
     Context context;
     List<Word> words;
-    List<Definition> definitions;
     RecyclerView rvExplore;
     ExploreAdapter exploreAdapter;
+    EditText etSearchbar;
+    String search;
+    ImageButton btnSearch;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_explore, container, false);
-
         rvExplore = view.findViewById(R.id.rvExplore);
+        etSearchbar = view.findViewById(R.id.etSearch);
+        btnSearch = view.findViewById(R.id.btnSearch);
+
         LinearLayoutManager manager = new LinearLayoutManager(context);
         rvExplore.setLayoutManager(manager);
+
+        render("");
+
+        btnSearch.setOnClickListener(this);
+
+        return view;
+    }
+
+    @Override
+    public void onClick(View view) {
+        search = etSearchbar.getText().toString();
+        render(search);
+    }
+
+    public void render(String word){
 
         Retrofit retrofit = APIClient.getRetrofit();
         HerokuService herokuService = retrofit.create(HerokuService.class);
 
-        /*TODO: Create query rebinding*/
-        Call<List<Word>> call = herokuService.getWords("app");
+        Call<List<Word>> call = herokuService.getWords(word);
 
         call.enqueue(new Callback<List<Word>>() {
             @Override
@@ -51,14 +74,6 @@ public class ExploreFragment extends Fragment {
                     exploreAdapter = new ExploreAdapter(words);
                     rvExplore.setAdapter(exploreAdapter);
                     exploreAdapter.setWords(words);
-
-//                    for(Word word : words){
-//                        Log.i("MYLOGS", word.getWord());
-//                        definitions = word.getDefinitions();
-//                        for(Definitions definition : definitions){
-//                            Log.i("MYLOGS", definition.getDefinition());
-//                        }
-//                    }
                 }
             }
 
@@ -67,10 +82,5 @@ public class ExploreFragment extends Fragment {
                 Log.i("MYLOGS", t.getMessage());
             }
         });
-
-
-        return view;
     }
-
-
 }
