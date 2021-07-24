@@ -92,7 +92,7 @@ public class ShowActivity extends AppCompatActivity {
             public void onClick(View view) {
                 ExploreHelper exploreHelper = new ExploreHelper(view.getContext());
                 exploreHelper.insert(intentWord);
-                Toast.makeText(context, "Word saved successfully!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Word saved successfully!", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
