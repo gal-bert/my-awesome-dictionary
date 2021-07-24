@@ -10,17 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyAwesomeDictionary">
         <activity
-            android:name=".MainActivity2"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/Theme.MyAwesomeDictionary.NoActionBar"></activity>
-        <activity android:name=".ShowActivity" />
-        <activity android:name=".MainActivity">
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.MyAwesomeDictionary.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".TabActivity"
+            android:label="@string/title_activity_tab"
+            android:theme="@style/Theme.MyAwesomeDictionary.NoActionBar">
+
+        </activity>
+        <activity android:name=".ShowActivity" />
     </application>
 
 </manifest>
