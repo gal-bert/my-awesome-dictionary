@@ -12,14 +12,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Vector;
 
 public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHolder> {
 
-    Vector<String> listWord;
+    List<WordListResponse> wordListResponses;
 
-    public ExploreAdapter(Vector<String> listWord){
-        this.listWord = listWord;
+    public ExploreAdapter(List<WordListResponse> wordListResponses){
+        this.wordListResponses = wordListResponses;
+    }
+
+    public void setListWord(List<WordListResponse> wordListResponses){
+        this.wordListResponses = wordListResponses;
+        notifyDataSetChanged();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -40,12 +46,13 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.tvWord.setText(listWord.get(position));
+        WordListResponse wordListResponse = wordListResponses.get(position);
+        holder.tvWord.setText(wordListResponse.word);
     }
 
     @Override
     public int getItemCount() {
-        return listWord.size();
+        return wordListResponses.size();
     }
 
 
