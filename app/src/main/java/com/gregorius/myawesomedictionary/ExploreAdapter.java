@@ -2,12 +2,13 @@ package com.gregorius.myawesomedictionary;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +18,7 @@ import java.util.List;
 public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHolder> {
 
     List<Word> words;
+    Context context;
 
     public ExploreAdapter(List<Word> words){
         this.words = words;
@@ -30,10 +32,19 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tvWord;
+        Button btnSave;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvWord = itemView.findViewById(R.id.tvWord);
+            btnSave = itemView.findViewById(R.id.btnSave);
+
+            btnSave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(view.getContext(), "Button Clicked", Toast.LENGTH_SHORT).show();
+                }
+            });
 
             itemView.setOnClickListener(this);
         }

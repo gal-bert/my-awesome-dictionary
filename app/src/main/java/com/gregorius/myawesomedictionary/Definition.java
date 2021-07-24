@@ -2,22 +2,22 @@ package com.gregorius.myawesomedictionary;
 
 public class Definition {
 
-    private String img_url;
+    private String image_url;
     private String type;
     private String definition;
 
-    public Definition(String img_url, String type, String definition) {
-        this.img_url = img_url;
+    public Definition(String image_url, String type, String definition) {
+        this.image_url = image_url;
         this.type = type;
         this.definition = definition;
     }
 
-    public String getImg_url() {
-        return img_url;
+    public String getImage_url() {
+        return image_url;
     }
 
-    public void setImg_url(String img_url) {
-        this.img_url = img_url;
+    public void setImg_url(String image_url) {
+        this.image_url = image_url;
     }
 
     public String getType() {

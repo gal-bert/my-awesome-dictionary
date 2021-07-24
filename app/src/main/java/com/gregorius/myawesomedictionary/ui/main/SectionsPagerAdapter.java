@@ -12,10 +12,6 @@ import com.gregorius.myawesomedictionary.ExploreFragment;
 import com.gregorius.myawesomedictionary.FavoritesFragment;
 import com.gregorius.myawesomedictionary.R;
 
-/**
- * A [FragmentPagerAdapter] that returns a fragment corresponding to
- * one of the sections/tabs/pages.
- */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
@@ -43,7 +39,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        // Show 2 total pages.
         return 2;
     }
 }

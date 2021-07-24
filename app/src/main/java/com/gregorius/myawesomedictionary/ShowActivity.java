@@ -44,7 +44,7 @@ public class ShowActivity extends AppCompatActivity {
 
         LinearLayoutManager manager = new LinearLayoutManager(this);
         rvShow.setLayoutManager(manager);
-        showAdapter = new ShowAdapter(context);
+        showAdapter = new ShowAdapter(this);
         rvShow.setAdapter(showAdapter);
 
         Intent intent = getIntent();

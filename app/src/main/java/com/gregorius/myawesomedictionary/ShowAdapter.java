@@ -1,6 +1,7 @@
 package com.gregorius.myawesomedictionary;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,8 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tvType.setText("Type: " + definitions.get(position).getType());
         holder.tvDesc.setText(definitions.get(position).getDefinition());
-        Glide.with(context).load(definitions.get(position).getImg_url()).into(holder.imvImage);
+        Log.i("MYLOG", "IMG URL: " + definitions.get(position).getImage_url());
+        Glide.with(context).load(definitions.get(position).getImage_url()).fallback(R.drawable.ic_launcher_foreground).into(holder.imvImage);
 
     }
 
