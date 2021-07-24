@@ -97,7 +97,6 @@ public class ShowActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     public void actionBar(){
