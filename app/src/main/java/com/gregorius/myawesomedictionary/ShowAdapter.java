@@ -54,7 +54,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
         holder.tvType.setText("Type: " + definitions.get(position).getType());
         holder.tvDesc.setText(definitions.get(position).getDefinition());
         Log.i("MYLOG", "IMG URL: " + definitions.get(position).getImage_url());
-        Glide.with(context).load(definitions.get(position).getImage_url()).fallback(R.drawable.ic_launcher_foreground).into(holder.imvImage);
+        Glide.with(context).load(definitions.get(position).getImage_url()).fallback(R.drawable.fallback).into(holder.imvImage);
 
     }
 
