@@ -1,12 +1,12 @@
 package com.gregorius.myawesomedictionary;
 
-public class Definitions {
+public class Definition {
 
     private String img_url;
     private String type;
     private String definition;
 
-    public Definitions(String img_url, String type, String definition) {
+    public Definition(String img_url, String type, String definition) {
         this.img_url = img_url;
         this.type = type;
         this.definition = definition;

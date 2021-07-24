@@ -5,9 +5,9 @@ import java.util.List;
 public class Word {
 
     private String word;
-    private List<Definitions> definitions;
+    private List<Definition> definitions;
 
-    public Word(String word, List<Definitions> definitions) {
+    public Word(String word, List<Definition> definitions) {
         this.word = word;
         this.definitions = definitions;
     }
@@ -20,11 +20,11 @@ public class Word {
         this.word = word;
     }
 
-    public List<Definitions> getDefinitions() {
+    public List<Definition> getDefinitions() {
         return definitions;
     }
 
-    public void setDefinitions(List<Definitions> definitions) {
+    public void setDefinitions(List<Definition> definitions) {
         this.definitions = definitions;
     }
 }

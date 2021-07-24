@@ -13,19 +13,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
-import java.util.Vector;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ExploreFragment extends Fragment {
 
     Context context;
     List<Word> words;
-    List<Definitions> definitions;
+    List<Definition> definitions;
     RecyclerView rvExplore;
     ExploreAdapter exploreAdapter;
 
@@ -41,6 +39,7 @@ public class ExploreFragment extends Fragment {
         Retrofit retrofit = APIClient.getRetrofit();
         HerokuService herokuService = retrofit.create(HerokuService.class);
 
+        /*TODO: Create query rebinding*/
         Call<List<Word>> call = herokuService.getWords("app");
 
         call.enqueue(new Callback<List<Word>>() {
@@ -53,13 +52,13 @@ public class ExploreFragment extends Fragment {
                     rvExplore.setAdapter(exploreAdapter);
                     exploreAdapter.setWords(words);
 
-                    for(Word word : words){
-                        Log.i("MYLOGS", word.getWord());
-                        definitions = word.getDefinitions();
-                        for(Definitions definition : definitions){
-                            Log.i("MYLOGS", definition.getDefinition());
-                        }
-                    }
+//                    for(Word word : words){
+//                        Log.i("MYLOGS", word.getWord());
+//                        definitions = word.getDefinitions();
+//                        for(Definitions definition : definitions){
+//                            Log.i("MYLOGS", definition.getDefinition());
+//                        }
+//                    }
                 }
             }
 
