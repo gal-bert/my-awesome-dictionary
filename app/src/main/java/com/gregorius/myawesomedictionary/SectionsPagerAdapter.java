@@ -1,4 +1,4 @@
-package com.gregorius.myawesomedictionary.ui.main;
+package com.gregorius.myawesomedictionary;
 
 import android.content.Context;
 

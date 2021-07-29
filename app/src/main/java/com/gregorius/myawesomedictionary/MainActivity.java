@@ -2,21 +2,11 @@ package com.gregorius.myawesomedictionary;
 
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
-
-import com.gregorius.myawesomedictionary.ui.main.SectionsPagerAdapter;
 import com.gregorius.myawesomedictionary.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
